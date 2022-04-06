@@ -1,0 +1,1 @@
+7z a -tzip -i!parasol\shaders\LineShader.hx -i!CHANGELOG.md -i!LICENSE -i!README.md -i!haxelib.json parasol.zip

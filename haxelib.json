@@ -1,0 +1,11 @@
+{
+    "name": "parasol",
+    "classPath": "parasol/",
+    "license": "MIT",
+    "releasenote": "Initially just documentation.",
+    "url": "https://github.com/47rooks/parasol",
+    "contributors": ["47rooks"],
+    "version": "0.0.1",
+    "tags": ["flixel","openfl"],
+    "description": "A shader and utilities library for HaxeFlixel."
+}

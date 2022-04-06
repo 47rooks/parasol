@@ -1,0 +1,7 @@
+-lib openfl:9.1.0
+-lib flixel:4.11.0
+-lib flixel-addons:2.11.0
+-lib flixel-ui:2.4.0
+-lib lime:7.9.0
+-lib utest
+-lib test-adapter
