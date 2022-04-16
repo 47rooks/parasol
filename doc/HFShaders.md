@@ -17,6 +17,7 @@
     - [Converting GLSL Code to HaxeFlixel GLSL Code](#converting-glsl-code-to-haxeflixel-glsl-code)
       - [An Example Conversion](#an-example-conversion)
     - [Debugging HF Shader Code](#debugging-hf-shader-code)
+      - [Dumping the shader code](#dumping-the-shader-code)
   - [Appendices](#appendices)
     - [A. The OpenGL pipeline](#a-the-opengl-pipeline)
     - [B. Glossary](#b-glossary)
@@ -304,7 +305,7 @@ Of course, the precise changes required will vary, and your HF code will have to
 
 ### Debugging HF Shader Code
 
-Once converted the shader may not run due to some conversion mistake or other reason. To debug this add a `-v` flag to your `lime test` or `lime run` command to turn on GLSL compiler error reporting. Your code is not actually compiled until fairly late, at runtime. This makes sense because the code does not need to be compiled if it isn't actually used.
+Once converted the shader may not run due to some conversion mistake or other reason. Generally, serious errors in compilation will be dumped to the terminal output during debug runs. If you need to explicitly enable debug add a `-v` flag to your `lime test` or `lime run` command to turn on GLSL compiler error reporting. Your code is not actually compiled until fairly late, at runtime. This makes sense because the code does not need to be compiled if it isn't actually used.
 
 Debug output will show you GLSL compiler errors raised by your code, and while it will include your code in the error message there are no line numbers attached to your code. But there are on the messages and you can take the dumped shader code in the error message and figure out which line is at fault. Remember that there will be additional HF/OpenFl code added to your code because of the pragmas. So you cannot just compare to your original code. Here is an example of a fragment shader throwing errors.
 
@@ -329,6 +330,17 @@ Uncaught exception: [openfl.display.Shader] ERROR: Error compiling fragment shad
         ...
         ...
 ```
+
+#### Dumping the shader code
+
+If necessary you can dump the GLSL code from your FlxShader by tracing out the glVertexSource and glFragmentSource fields. These are just text strings with the source in them. Then can simply be passed to the trace() function like this:
+
+```
+trace('vertex source=${shader.glFragmentSource}');
+trace('fragment source=${shader.glVertexSource}');
+```
+
+where `shader` is the variable containing your FlxShader instance.
 
 ## Appendices
 
