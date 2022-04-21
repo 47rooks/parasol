@@ -17,6 +17,7 @@
     - [Converting GLSL Code to HaxeFlixel GLSL Code](#converting-glsl-code-to-haxeflixel-glsl-code)
       - [An Example Conversion](#an-example-conversion)
     - [Debugging HF Shader Code](#debugging-hf-shader-code)
+      - [Some Errors You Might See](#some-errors-you-might-see)
       - [Dumping the shader code](#dumping-the-shader-code)
   - [Appendices](#appendices)
     - [A. The OpenGL pipeline](#a-the-opengl-pipeline)
@@ -330,6 +331,14 @@ Uncaught exception: [openfl.display.Shader] ERROR: Error compiling fragment shad
         ...
         ...
 ```
+
+#### Some Errors You Might See
+
+```
+Can't cast openfl.display.ShaderParameter_Bool to openfl.display.ShaderParameter_Float
+Uncaught exception: Can't cast openfl.display.ShaderParameter_Bool to openfl.display.ShaderParameter_Float
+```
+This can happen if you have a comment in your GLSL code in your @:glVertexSource/@:glFragmentSource where you have something like `... uniform to change  ...`. The OpenFl parser will think there is another uniform there with an unknown type and process it incorrectly. Until the issue is addressed the simple thing to do is hyphenate uni-form in any cases like this.
 
 #### Dumping the shader code
 
