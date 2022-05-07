@@ -3,14 +3,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://lime.software/project/1.0.2 http://lime.software/xsd/project-1.0.2.xsd">
 
-	<!--
-        Enable the next line to set the testing variable so that VSCode Intellisense and such
-		finds all the test artifacts and libs. Otherwise a simple -Dtesting flag added to the build
-		will build the test application. Removing it will build the game.
+	<!-- Enable the next line to set the testing variable so that VSCode Intellisense and such
+		 finds all the test artifacts and libs. Otherwise a simple -Dtesting flag added to the build
+		 will build the test application. Removing it will build the game.
 	-->
-	<set name="tests"/>
-	<!-- <set name="examples"/> -->
-
+	<!-- <set name="tests"/> -->
+	<set name="examples"/>
 	
 	<!-- _________________________ Application Settings _________________________ -->
 
@@ -27,7 +25,6 @@
 	<!-- ____________________________ Window Settings ___________________________ -->
 
 	<!--These window settings apply to all targets-->
-	<!-- <window width="640" height="480" fps="60" background="#000000" hardware="true" vsync="false" /> -->
 	<window width="1920" height="1280" fps="60" background="#000000" hardware="true" vsync="false" />
 
 	<!--HTML5-specific-->
@@ -42,7 +39,7 @@
 	<!-- _____________________________ Path Settings ____________________________ -->
 
 	<set name="BUILD_DIR" value="export" />
-	<source path="parasol" />                   // Haxelib source hierarchy
+	<source path="parasol" include="parasol" /> // Haxelib source hierarchy
 	<assets path="assets" />
 	<source path="tests/unit" if="tests"/>      // Test code hierarchy
 	<source path="examples" if="examples"/>     // Example code
