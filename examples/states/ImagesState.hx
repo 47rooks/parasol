@@ -38,7 +38,7 @@ class ImagesState extends DemoState {
         },
         {
             "file": "assets/images/pexels-pixabay-73873.png",
-            "name": "Fiery nebula"
+            "name": "Solar flare"
         }
     ];
 
