@@ -46,12 +46,12 @@ class MenuState extends DemoState
 
 		_row += LINE_Y;
 
-		// addMenuItem("Basic filters", () ->
-		// {
-		// 	FlxG.switchState(new BloomFilterState());
-		// }, "BloomFilter");
-		// addMenuItem("Basic shaders", () ->
+		addMenuItem("Bloom filter", () ->
+		{
+			FlxG.switchState(new BloomFilterState());
+		}, "A Gaussian bloom filter based on Learn OpenGL");
 
+		// addMenuItem("Basic shaders", () ->
 		// {
 		// 	FlxG.switchState(new PolyLineShader());
 		// }, "Basic color gradient.");

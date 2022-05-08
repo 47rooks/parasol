@@ -34,7 +34,7 @@ class ThresholdShader extends FlxShader {
      */
     override public function new(brightnessThreshold: Float) {
         super();
-        this.u_brightnessThreshold.value = [brightnessThreshold];
+        this.u_brightnessThreshold.value = [clamp(brightnessThreshold)];
     }
 
     /**

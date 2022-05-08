@@ -1,5 +1,6 @@
 package examples.states;
 
+import flixel.system.FlxAssets.FlxShader;
 import parasol.shaders.ThresholdShader;
 import flixel.util.FlxColor;
 import flixel.addons.ui.FlxSlider;
@@ -11,6 +12,7 @@ import examples.states.ImagesState;
  */
 class ThresholdShaderState extends ImagesState {
     var _controls:Controls;
+    var _shader:FlxShader;
 
     var _brightnessThreshold:Float = 0.5; // Initial threshold value
     var _prevThreshold:Float = 0.5;       // previous threshold value
@@ -37,9 +39,20 @@ class ThresholdShaderState extends ImagesState {
             brightnessSlider,
             // Add a pulldown to choose the image
             getImageChooser(Controls.LINE_X, 200)
-        ]);
+        ], _controlsCamera);
 
         add(_controls._controls);
+    }
+
+    /**
+     * Toggle the shader on and off, callback for enable checkbox.
+     */
+     function toggleShader():Void {
+        if (_sprite.shader == null) {
+            _sprite.shader = _shader;
+        } else {
+            _sprite.shader = null;
+        }
     }
 
     /**

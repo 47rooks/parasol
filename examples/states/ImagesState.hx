@@ -1,14 +1,14 @@
 package examples.states;
 
+import flixel.FlxG;
+import flixel.FlxCamera;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.addons.ui.FlxUIDropDownMenu;
 import flixel.addons.ui.FlxSlider;
-import flixel.addons.ui.FlxUICheckBox;
 import flixel.addons.ui.FlxUIText;
 import flixel.addons.ui.StrNameLabel;
 import flixel.group.FlxSpriteGroup;
-import flixel.system.FlxAssets.FlxShader;
 import flixel.FlxSprite;
 import examples.states.DemoState;
 import examples.states.MenuState;
@@ -23,13 +23,12 @@ typedef ImageData = {
  */
 class ImagesState extends DemoState {
     var _sprite:FlxSprite;
-    var _shader:FlxShader;
-
-    var _shaderOn:FlxUICheckBox;
 
     var _bloomBrightnessThreshold:Float = 0.5;
     var _prevBrightnessThreshold:Float = 0.5;
     var _bloomBrightnessSlider:FlxSlider;
+
+    var _controlsCamera:FlxCamera;
 
     final images:Array<ImageData> = [
         {
@@ -49,8 +48,16 @@ class ImagesState extends DemoState {
     override public function create() {
         super.create();
 
+        // Create a second camera for the controls so they will not be affected by filters.
+        _controlsCamera = new FlxCamera(0, 0, FlxG.width, FlxG.height);
+        _controlsCamera.bgColor = FlxColor.TRANSPARENT;
+        FlxG.cameras.add(_controlsCamera, false);
+        add(_controlsCamera);
+
         _sprite = new FlxSprite(0, 0);
         _sprite.loadGraphic(images[0].file);   // spiral galaxy
+        // _sprite.cameras = [_controlsCamera];
+        _sprite.cameras = [FlxG.camera];
         add(_sprite);
     }
 
@@ -65,17 +72,6 @@ class ImagesState extends DemoState {
         },
         new FlxUIDropDownHeader(120, null, new FlxUIText(0, 0, 200, null, 12)));
         return imagePullDown;
-    }
-
-    /**
-     * Toggle the shader on and off, callback for enable checkbox.
-     */
-    function toggleShader():Void {
-        if (_sprite.shader == null) {
-            _sprite.shader = _shader;
-        } else {
-            _sprite.shader = null;
-        }
     }
 }
 
@@ -93,24 +89,28 @@ class Controls {
      * @param yLoc the y position to place the group at.
      * @param xSize the width of the controls pane.
      * @param ySize the height of the controls pane.
-     * @param uiElts an Array of FlxSprites to add to the control pane 
+     * @param uiElts an Array of FlxSprites to add to the control pane
      */
-    public function new(xLoc:Float, yLoc:Float, xSize:Int, ySize:Int, uiElts:Array<FlxSprite>) {
+    public function new(xLoc:Float, yLoc:Float, xSize:Int, ySize:Int, uiElts:Array<FlxSprite>, camera:FlxCamera) {
 
-        _controls = new FlxSpriteGroup();
-
-        // Put a semi-transparent background in
+       // Put a semi-transparent background in
         var controlbg = new FlxSprite(10, 10);
         controlbg.makeGraphic(xSize, ySize, FlxColor.BLACK);
         controlbg.alpha = 0.3;
+        controlbg.cameras = [camera];
+
+        _controls = new FlxSpriteGroup(xLoc, yLoc);
+        _controls.cameras = [camera];
+
         _controls.add(controlbg);
 
         // Add controls
-        _controls = new FlxSpriteGroup(xLoc, yLoc);
         for (ui in uiElts) {
+            ui.cameras = [camera];
             _controls.add(ui);
         }
 
-        _controls.add(new FlxText(LINE_X, ySize - 40, "Hit <ESC> to return to the menu", MenuState.BASE_FONT_SIZE));
+        var returnPrompt = new FlxText(LINE_X, ySize - 40, "Hit <ESC> to return to the menu", MenuState.BASE_FONT_SIZE);
+        _controls.add(returnPrompt);
     }
 }
