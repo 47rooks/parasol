@@ -3,15 +3,18 @@
 In no particular order the following things need to be examined and notes, helpers and possibly demos have to be produced:
 
 ## Simpler Shader Problems
+   * create test images for BloomFilter
+     * bunch of squares or different colors
+     * a 2D scene - mostly fairly dark and a few highlights
    * using multiple images, so you have the base image and a texture
    * metaballs - need this for blobby fluids
-   * basic glow shader
-   * camera filters
+   * automated testing for shaders and filters
+     * use BitmapData.compare and reference images
+     * construct reference images
+   * GrayscaleShader - this should be simple taking the luma value and set
+     * glFragColor = vec4(vec3(lumavalue), texture bitmap alpha))
 
 ## Harder Problems
-   * using multiple buffers for multi-pass effects, needs:
-     * multiple sampler2D uniforms I expect, or some other way to create another buffer
-     * a way to redirect the fragment output to a specific buffer
    * how to share shader code between multiple FlxShaders - couple of options - no idea what will work
      * read glsl code from files in a macro at compile time
      * somehow create multiple shader pieces with the existing macro support
