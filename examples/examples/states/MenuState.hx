@@ -1,5 +1,6 @@
 package examples.states;
 
+import flixel.FlxState;
 import flixel.FlxG;
 import flixel.addons.ui.FlxUIButton;
 import flixel.system.FlxAssets;
@@ -12,7 +13,7 @@ import examples.states.DemoState;
 /**
  * MenuState provides a menu page for example shaders and filters.
  */
-class MenuState extends DemoState
+class MenuState extends FlxState
 {
 	static final LEFT_X = 10;
 	static final TOP_Y = 100;
@@ -64,10 +65,11 @@ class MenuState extends DemoState
 		// }, "A basic sea-like water effect.");
 
 		// _row += LINE_Y;
-
+		#if desktop
 		_row += 2 * LINE_Y;
 
 		add(new FlxText(LEFT_X, _row, "Hit <ESC> to exit the demo", BASE_FONT_SIZE));
+		#end
 	}
 
 	/**
@@ -89,17 +91,18 @@ class MenuState extends DemoState
 		add(desc);
 	}
 
+	#if desktop
 	/**
 	 * Override the DemoState update function to make the program exit if ESCAPE is hit.
 	 * @param elapsed the elapsed time since the last update call.
 	 */
 	override public function update(elapsed:Float) {
-		#if desktop
         if (FlxG.keys.justReleased.ESCAPE) {
             Sys.exit(0);
         }
-		#end
 
         super.update(elapsed);
     }
+	#end
+
 }

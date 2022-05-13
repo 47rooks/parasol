@@ -21,7 +21,7 @@ class BloomFilterState extends ImagesState {
     static final INITIAL_BRIGHTNESS_THRESHOLD = 0.5;
     var _brightnessThreshold:Float = INITIAL_BRIGHTNESS_THRESHOLD;
 
-    static final INITIAL_BLUR_PASSES = 10;
+    static final INITIAL_BLUR_PASSES = 2;
     static final MAX_BLUR_PASSES = 100;
     var _blurPasses:Int = INITIAL_BLUR_PASSES;
 
@@ -86,6 +86,7 @@ class BloomFilterState extends ImagesState {
 	 * @return Int the corrected value
 	 */
 	function correctBlurPasses():Int {
+        _blurPasses = Math.floor(_blurPasses);
         if (_blurPasses < 0) return 0;
         if (_blurPasses > MAX_BLUR_PASSES) return MAX_BLUR_PASSES;
         if (_blurPasses % 2 != 0) return _blurPasses + 1;
