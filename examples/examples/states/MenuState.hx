@@ -47,6 +47,13 @@ class MenuState extends FlxState
 
 		_row += LINE_Y;
 
+		addMenuItem("Grayscale Shader", () ->
+		{
+			FlxG.switchState(new GrayscaleShaderState());
+		}, "Convert the image to a grayscale version");
+
+		_row += LINE_Y;
+
 		addMenuItem("Bloom filter", () ->
 		{
 			FlxG.switchState(new BloomFilterState());
