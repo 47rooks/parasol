@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project xmlns="http://lime.software/project/1.0.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://lime.software/project/1.0.2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://lime.software/project/1.0.2 http://lime.software/xsd/project-1.0.2.xsd">
 
+	<!-- Enable the next line to set the testing variable so that VSCode Intellisense and such
+		 finds all the test artifacts and libs. Otherwise a simple -Dtesting flag added to the build
+		 will build the test application. Removing it will build the game.
+	-->
+	<!-- <set name="tests"/> -->
+	<set name="examples"/>
+	
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<!-- <app title="parasol" file="parasol" main="tests.unit.TestMain" version="0.0.1" company="Rookery Games" /> -->
-	<app title="parasol" file="parasol" main="examples.Main" version="0.0.1" company="Rookery Games" />
+	<app title="parasol" file="parasol" main="tests.unit.TestMain" version="0.0.1" company="Rookery Games" if="tests"/>
+	<app title="parasol" file="parasol" main="examples.Main" version="0.0.1" company="Rookery Games" if="examples"/>
 
 	<!--The flixel preloader is not accurate in Chrome. You can use it regularly if you embed the swf into a html file
 		or you can set the actual size of your file manually at "FlxPreloaderBase-onUpdate-bytesTotal"-->
@@ -17,7 +25,7 @@
 	<!-- ____________________________ Window Settings ___________________________ -->
 
 	<!--These window settings apply to all targets-->
-	<window width="640" height="480" fps="60" background="#000000" hardware="true" vsync="false" />
+	<window width="1920" height="1280" fps="60" background="#000000" hardware="true" vsync="false" />
 
 	<!--HTML5-specific-->
 	<window if="html5" resizable="false" />
@@ -31,9 +39,10 @@
 	<!-- _____________________________ Path Settings ____________________________ -->
 
 	<set name="BUILD_DIR" value="export" />
-	<source path="parasol" />  // Haxelib source hierarchy
+	<source path="parasol" include="parasol" /> // Haxelib source hierarchy
 	<assets path="assets" />
-	<assets path="tests/unit" />   // Test code hierarchy
+	<source path="tests/unit" if="tests"/>      // Test code hierarchy
+	<source path="examples" if="examples"/>     // Example code
 
 	<!-- _______________________________ Libraries ______________________________ -->
 
@@ -48,7 +57,7 @@
 	<!--In case you want to use nape with flixel-->
 	<!--<haxelib name="nape-haxe4" />-->
 
-	<haxelib name="utest"/>
+	<haxelib name="utest" if="tests"/>
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
