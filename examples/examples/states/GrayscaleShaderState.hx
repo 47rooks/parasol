@@ -2,8 +2,6 @@ package examples.states;
 
 import flixel.system.FlxAssets.FlxShader;
 import parasol.shaders.GrayscaleShader;
-import flixel.util.FlxColor;
-import flixel.addons.ui.FlxSlider;
 import flixel.addons.ui.FlxUICheckBox;
 import examples.states.ImagesState;
 
