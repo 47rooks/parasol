@@ -7,5 +7,9 @@
     "contributors": ["47rooks"],
     "version": "0.0.2",
     "tags": ["flixel","openfl"],
-    "description": "A shader and utilities library for HaxeFlixel."
+    "description": "A shader and utilities library for HaxeFlixel.",
+    "dependencies": {
+        "openfl": "9.1.0",
+        "flixel": "4.11.0"
+    }
 }
