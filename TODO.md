@@ -11,8 +11,6 @@ In no particular order the following things need to be examined and notes, helpe
    * automated testing for shaders and filters
      * use BitmapData.compare and reference images
      * construct reference images
-   * GrayscaleShader - this should be simple taking the luma value and set
-     * glFragColor = vec4(vec3(lumavalue), texture bitmap alpha))
 
 ## Harder Problems
    * how to share shader code between multiple FlxShaders - couple of options - no idea what will work
