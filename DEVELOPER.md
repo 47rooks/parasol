@@ -25,3 +25,7 @@ Go to a command shell or Powershell
 ```
 release.bat
 ```
+
+## Updating the CHANGELOG.md
+
+The CHANGELOG.md should only contain updates to the Haxelib package itself. All other updates to the repo are to be excluded.
