@@ -4,7 +4,7 @@ import flixel.system.FlxAssets.FlxShader;
 
 /**
  * A CombiningShader combines two textures into one output. They are the
- * sourceBitmap and the openfl_Texture bitmaps. This shader is expected to be used
+ * sourceBitmap and the bitmap bitmaps. This shader is expected to be used
  * in a openfl.filters.BitmapFilter subclass, which is expected to set the `sourceBitmap.input`
  * field before returning this shader to the filter driver code. See `parasol.filters.BloomFilter`
  * for example usage.
@@ -15,7 +15,6 @@ class CombiningShader extends FlxShader {
         #pragma header
 
         uniform sampler2D sourceBitmap;
-        uniform sampler2D openfl_Texture;
 
         void main()
         {
