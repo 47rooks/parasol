@@ -1,4 +1,4 @@
-package tests.unit.parasol.math;
+package unit.parasol.math;
 
 import parasol.math.Distributions;
 import utest.Assert;

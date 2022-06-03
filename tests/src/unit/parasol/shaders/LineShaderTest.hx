@@ -1,4 +1,4 @@
-package tests.unit.parasol.shaders;
+package unit.parasol.shaders;
 
 import parasol.shaders.LineShader;
 import utest.Assert;
