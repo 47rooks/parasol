@@ -7,12 +7,12 @@
 		 finds all the test artifacts and libs. Otherwise a simple -Dtesting flag added to the build
 		 will build the test application. Removing it will build the game.
 	-->
-	<!-- <set name="tests"/> -->
-	<set name="examples"/>
+	<set name="tests"/>
+	<!-- <set name="examples"/> -->
 	
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="parasol" file="parasol" main="tests.unit.TestMain" version="0.0.1" company="Rookery Games" if="tests"/>
+	<app title="parasol" file="parasol" main="unit.TestMain" version="0.0.1" company="Rookery Games" if="tests"/>
 	<app title="parasol" file="parasol" main="examples.Main" version="0.0.1" company="Rookery Games" if="examples"/>
 
 	<!--The flixel preloader is not accurate in Chrome. You can use it regularly if you embed the swf into a html file
@@ -41,7 +41,9 @@
 	<set name="BUILD_DIR" value="export" />
 	<source path="parasol" include="parasol" /> // Haxelib source hierarchy
 	<assets path="assets" />
-	<source path="tests/unit" if="tests"/>      // Test code hierarchy
+	<source path="tests/src" if="tests"/>       // Test code hierarchy
+	<assets path="tests/reference" if="tests"/> // Reference logs
+	<assets path="tests/data" if="tests"/>      // Test data files
 	<source path="examples" if="examples"/>     // Example code
 
 	<!-- _______________________________ Libraries ______________________________ -->
@@ -94,4 +96,7 @@
 	<!-- _________________________________ Custom _______________________________ -->
 
 	<!--Place custom nodes like icons here (higher priority to override the HaxeFlixel icon)-->
+
+	<!-- _____________________________ Comiler Options __________________________ -->
+	<haxeflag name="--macro" value="addMetadata('@:build(unit.macros.InstallCallout.build(\'present\', \'unit.utils.Capture.capture\'))', 'openfl.display3D.Context3D')" if="tests"/>
 </project>

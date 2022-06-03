@@ -1,4 +1,4 @@
-package tests.unit.parasol.math;
+package unit.parasol.math;
 
 import parasol.math.KernelBuilder;
 import utest.Assert;
