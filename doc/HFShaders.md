@@ -19,6 +19,7 @@
     - [Debugging HF Shader Code](#debugging-hf-shader-code)
       - [Some Errors You Might See](#some-errors-you-might-see)
       - [Dumping the shader code](#dumping-the-shader-code)
+      - [Using the Reference Compiler to find Errors](#using-the-reference-compiler-to-find-errors)
   - [Appendices](#appendices)
     - [A. The OpenGL pipeline](#a-the-opengl-pipeline)
     - [B. Glossary](#b-glossary)
@@ -350,6 +351,16 @@ trace('fragment source=${shader.glVertexSource}');
 ```
 
 where `shader` is the variable containing your FlxShader instance.
+
+#### Using the Reference Compiler to find Errors
+
+Not all graphics drivers adhere as closely to the Shader Language specifications as others. As a consequence a more permissive driver may run code that it really shouldn't while a more strict driver will fail with it. There is an accurate 'reference' compiler available which you can use to check whether a strict compilation will succeed.
+
+The OpenGL / OpenGL ES Reference Compiler is described here [https://www.khronos.org/opengles/sdk/tools/Reference-Compiler/]. There is a link to download the compiler from github from [https://github.com/KhronosGroup/glslang/releases/tag/master-tot]. The files contain a compiler in the `/bin` directory called `glslangValidator` or on Windows `glslangValidator.exe`. Unzip the zip file to some location.
+
+Once that it is done create a file with your shader code in it, for example `shader.frag`. Then you can run the validator against it and it will report any errors. Instructions for running it are on the khronos page, but the simplest invocation is of the form `glslangValidator.exe shader.frag`. This will report any errors in your code.
+
+It will fail on the openfl variables if you just put the code from your `@:glFragmentSource` or `@:glVertexSource` calls. This is because those macros insert other boilerplate code before your code. So it is best to get the shader code as described above in [Dumping the shader code](#dumping-the-shader-code) and use that. It will contain all the code introduced by the macros which is what the graphics driver compiler will see.
 
 ## Appendices
 
