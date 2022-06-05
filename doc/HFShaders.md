@@ -213,7 +213,21 @@ These are always done using variable.value and assigning an array of values, whi
 	}
 ```
 
-This approach may be followed for any data that needs to be updated by host program (game) state and made known to the GLSL program.
+This approach may be followed for any data that needs to be updated by host program (game) state and made known to the GLSL program, except textures.
+
+Textures or images are passed into a shader in a GLSL `sampler2D` data type. To pass this in you assign a `openfl.display.BitmapData` variable to the `input` field of the sampler2D uniform variable. If you have this in your shader:
+
+```
+uniform sampler2D sourceBitmap;
+```
+
+then in your host program you assign a BitmapData object to it like this:
+
+```
+sourceBitmap.input = sourceBitmapData;
+```
+
+Note, that the BitmapData is assigned directly, without being put in an array. This example comes from the Parasol BloomFilter and CombiningShader classes.
 
 ## Developing GLSL Shader Code
 
