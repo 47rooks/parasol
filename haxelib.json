@@ -1,15 +1,15 @@
 {
     "name": "parasol",
-    "classPath": "parasol/",
     "license": "MIT",
     "releasenote": "Bloom filter, Threshold, Combining, Blur and Grayscale shaders.",
     "url": "https://github.com/47rooks/parasol",
     "contributors": ["47rooks"],
-    "version": "0.0.2",
+    "version": "0.0.3",
     "tags": ["flixel","openfl"],
     "description": "A shader and utilities library for HaxeFlixel.",
     "dependencies": {
         "openfl": "9.1.0",
-        "flixel": "4.11.0"
+        "flixel": "4.11.0",
+        "lime": "7.9.0"
     }
 }
