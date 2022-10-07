@@ -3,6 +3,10 @@ package;
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxShader;
 
+/**
+ * This implements a flixel shader based on Tech_'s OLD TV SHADER
+ * from Shadertoy. The original is at https://www.shadertoy.com/view/WdGcRh.
+ */
 class OldTVShader extends FlxShader
 {
 	@:glFragmentSource("
