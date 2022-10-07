@@ -1,0 +1,7 @@
+--library flixel
+--library openfl
+--library lime
+--library haxeui-core
+--library haxeui-flixel
+--library formula
+--library polygonal-ds
