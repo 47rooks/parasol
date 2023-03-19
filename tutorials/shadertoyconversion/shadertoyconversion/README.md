@@ -271,3 +271,16 @@ This must be changed to
 ```
 
 At this point the test program should build and run.
+
+## Using the Shader as a Filter
+
+If you want to apply the shader to the entire game or to a camera you will need to wrap the shader
+in a ShaderFilter and apply it to a camera. To do this you will need code like the following added
+somewhere where you setup the camera.
+
+```
+		_oldTVShader = new OldTVShader(FlxG.width, FlxG.height);
+		_oldTVFilter = new ShaderFilter(_oldTVShader);
+		FlxG.camera.setFilters([_oldTVFilter]);
+		FlxG.camera.filtersEnabled = true;
+```
