@@ -15,7 +15,7 @@ While not an exhaustive list here are things that must be converted
   * Create a new `FlxShader` subclass for the shader.
   * All the fragment shader code from shadertoy must be pasted into a `@:glFragmentSource` metadata above the constructor `new()` function in your FlxShader subclass.
   * At the top of the `@:glFragmentSource` insert a `#pragma header` statement. Openfl will then insert an appropriate header of additional information.
-  * If you are deploying to HTML5 WebGL will require that the float precision value be set. If this is the case add a 
+  * If you are deploying to HTML5 WebGL will require that the float precision value be set. If this is the case add a `precision mediump float;` directive at the top of the shader code.
   * References to the texture() or texture2D() functions should be converted to flixel_texture2D()
   * iChannel0 references are the base image or video subjected to shading. This will be the sprite `bitmap`. You should change `iChannel0` to `bitmap` but there is no need to create a sampler2D uniform for it. Openfl will do this for you.
   * iChannelX where X > 0 are additional texture inputs. These you need to add `uniform sampler2D iChannelX` variables at the top of the shader.
@@ -271,3 +271,16 @@ This must be changed to
 ```
 
 At this point the test program should build and run.
+
+## Using the Shader as a Filter
+
+If you want to apply the shader to the entire game or to a camera you will need to wrap the shader
+in a ShaderFilter and apply it to a camera. To do this you will need code like the following added
+somewhere where you setup the camera.
+
+```
+		_oldTVShader = new OldTVShader(FlxG.width, FlxG.height);
+		_oldTVFilter = new ShaderFilter(_oldTVShader);
+		FlxG.camera.setFilters([_oldTVFilter]);
+		FlxG.camera.filtersEnabled = true;
+```

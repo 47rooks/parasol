@@ -1,17 +1,17 @@
 package examples.states;
 
-import flixel.FlxG;
+import examples.states.DemoState;
+import examples.states.MenuState;
 import flixel.FlxCamera;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-import flixel.addons.ui.FlxUIDropDownMenu;
+import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.addons.ui.FlxSlider;
+import flixel.addons.ui.FlxUIDropDownMenu;
 import flixel.addons.ui.FlxUIText;
 import flixel.addons.ui.StrNameLabel;
 import flixel.group.FlxSpriteGroup;
-import flixel.FlxSprite;
-import examples.states.DemoState;
-import examples.states.MenuState;
+import flixel.text.FlxText;
+import flixel.util.FlxColor;
 
 typedef ImageData = { 
     var file: String; // the filename for the image
@@ -82,7 +82,8 @@ class ImagesState extends DemoState {
 class Controls {
     public static final LINE_X = 50;
     public var _controls(default, null):FlxSpriteGroup;
-
+    var _controlbg:FlxSprite;
+    
     /**
      * Create a new Controls object.
      * @param xLoc the x position to place the group at.
@@ -93,16 +94,16 @@ class Controls {
      */
     public function new(xLoc:Float, yLoc:Float, xSize:Int, ySize:Int, uiElts:Array<FlxSprite>, camera:FlxCamera) {
 
-       // Put a semi-transparent background in
-        var controlbg = new FlxSprite(10, 10);
-        controlbg.makeGraphic(xSize, ySize, FlxColor.BLACK);
-        controlbg.alpha = 0.3;
-        controlbg.cameras = [camera];
+        // Put a semi-transparent background in
+        _controlbg = new FlxSprite(10, 10);
+        _controlbg.makeGraphic(xSize, ySize, FlxColor.BLACK);
+        _controlbg.alpha = 0.3;
+        _controlbg.cameras = [camera];
 
         _controls = new FlxSpriteGroup(xLoc, yLoc);
         _controls.cameras = [camera];
 
-        _controls.add(controlbg);
+        _controls.add(_controlbg);
 
         // Add controls
         for (ui in uiElts) {
@@ -112,5 +113,14 @@ class Controls {
 
         var returnPrompt = new FlxText(LINE_X, ySize - 40, "Hit <ESC> to return to the menu", MenuState.BASE_FONT_SIZE);
         _controls.add(returnPrompt);
+    }
+
+    /**
+     * Check if mouse overlaps the control area.
+     * @return Bool true if mouse overlaps control area, false otherwise.
+     */
+    public function mouseOverlaps():Bool {
+        
+        return FlxG.mouse.overlaps(_controlbg);
     }
 }

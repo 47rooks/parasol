@@ -1,14 +1,14 @@
 package examples.states;
 
-import flixel.FlxState;
+import examples.states.BloomFilterState;
+import examples.states.RippleShaderState;
+import examples.states.ThresholdShaderState;
 import flixel.FlxG;
+import flixel.FlxState;
 import flixel.addons.ui.FlxUIButton;
 import flixel.system.FlxAssets;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
-import examples.states.ThresholdShaderState;
-import examples.states.BloomFilterState;
-import examples.states.DemoState;
 
 /**
  * MenuState provides a menu page for example shaders and filters.
@@ -58,6 +58,15 @@ class MenuState extends FlxState
 		{
 			FlxG.switchState(new BloomFilterState());
 		}, "A Gaussian bloom filter based on Learn OpenGL");
+
+		_row += LINE_Y;
+
+		addMenuItem("Ripple shader", () ->
+		{
+			FlxG.switchState(new RippleShaderState());
+		}, "Sinusoidal ripple shader.");
+
+		// _row += LINE_Y;
 
 		// addMenuItem("Basic shaders", () ->
 		// {
