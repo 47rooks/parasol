@@ -13,6 +13,7 @@ In no particular order the following things need to be examined and notes, helpe
      * construct reference images
 
 ## Harder Problems
+   * FIXME Fix the fixes in the pixelation branch - this is an initial shader GLSL library function extractor
    * how to share shader code between multiple FlxShaders - couple of options - no idea what will work
      * read glsl code from files in a macro at compile time
      * somehow create multiple shader pieces with the existing macro support
