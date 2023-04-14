@@ -3,6 +3,7 @@ package unit.parasol.macros;
 
 #if macro
 import parasol.macros.ParasolShaderMacro;
+
 #end
 import haxe.ValueException;
 import utest.Assert;
@@ -12,13 +13,9 @@ using haxe.macro.ExprTools;
 
 class ParasolShaderMacroTest extends Test {
     /**
-     * Wrapper macro function so that test functions can invoke the macro context function.
+     * Wrapper macro functions so that test functions can invoke the macro context function.
      * @return ExprOf<String>
      */
-     @:access(parasol.macros.ParasolShaderMacro.getGLSLDirectory)
-     static macro function macroGetGLSLDirectory():ExprOf<String> {
-        return macro $v{ParasolShaderMacro.getGLSLDirectory()};
-    }
 
     @:access(parasol.macros.ParasolShaderMacro.countBrace)
     static macro function macroCountBrace(s:String, opening:Bool = true):ExprOf<Int> {
@@ -53,14 +50,34 @@ class ParasolShaderMacroTest extends Test {
         };
     }
 
+    @:access(parasol.macros.ParasolShaderMacro.getShaderText)
+    static macro function macroGetShaderText(glslFileName:String):ExprOf<String> {
+        try {
+            return macro $v{ParasolShaderMacro.getShaderText(glslFileName)};
+        } catch (ve:ValueException) {
+            return macro $v{ve.value};
+        };
+    }
+
+    @:access(parasol.macros.ParasolShaderMacro.GLSL_DIRECTORY)
+    static macro function macroGLSLDirectory():ExprOf<String> {
+        return macro $v{ParasolShaderMacro.GLSL_DIRECTORY};
+    }
+
+    @:access(parasol.macros.ParasolShaderMacro.GLSL_DIRECTORY)
+    static macro function macroSetGLSLDirectory(dir:String):ExprOf<String> {
+        ParasolShaderMacro.GLSL_DIRECTORY = dir;
+        return macro {};
+    }
+    
     /**
      * Given: the parasol library is installed
-     * When: `ParasolShaderMacro.getGLSLDirectory()` is called
+     * When: `ParasolShaderMacro.GLSL_DIRECTORY` is referenced
      * The: `parasol/shaders/glsl` is returned
      */
-    function testGetGLSLDirectory() {
-        var dir = ParasolShaderMacroTest.macroGetGLSLDirectory();
-        Assert.equals("parasol/shaders/glsl", dir);
+    @:access(parasol.macros.ParasolShaderMacro.GLSL_DIRECTORY)
+    function testGetDefaultGLSLDirectory() {
+        Assert.equals("parasol/shaders/glsl", macroGLSLDirectory());
     }
     
     /**
@@ -320,40 +337,58 @@ class ParasolShaderMacroTest extends Test {
      * When: `ParasolShaderMacro.getLibraryFunctionText` is called for one of the functions
      * Then: the function text is returned
      */
-    // function testGetLibraryFunctionText() {
-    //     var rv = ParasolShaderMacroTest.macroGetLibraryFunctionText("testLib.", "testFunc");
-    //     // Assert.match();
-    // }
+    function testGetLibraryFunctionText() {
+        ParasolShaderMacroTest.macroSetGLSLDirectory('tests/data/');
+        var rv = ParasolShaderMacroTest.macroGetLibraryFunctionText("testShaderLib.glsl", "testFunc");
+        trace('len(rv)=${rv.length}');
+        Assert.match(
+            ~/void testFunc\(\)(\r|\n)\s+\{(\r|\n)\s+gl_FragColor = vec4\(1.0, 0.0, 0.0, 1.0\);\s*(\r|\n)\}/i, rv
+        );
+    }
 
     /**
      * Given: a library file with multiple functions and boilerplate comments
      * When: `ParasolShaderMacro.getLibraryFunctionText` is called for function that does not exist in the file
      * Then: an exception is thrown indicating the function does not exist in that library
      */
+    function testGetLibraryFunctionTextNonExistentFunction() {
+        ParasolShaderMacroTest.macroSetGLSLDirectory('tests/data/');
+        var rv = ParasolShaderMacroTest.macroGetLibraryFunctionText("testShaderLib.glsl", "noExistentFunc");
+        Assert.equals('Function noExistentFunc was not found in file content provided.', rv);
+    }
 
     /**
      * Given: a library file
      * When: `ParasolShaderMacro.getLibraryFunctionText` for a non-existent library file
      * Then: an exception is thrown indicating the file does not exist
      */
+    function testGetLibraryFunctionTextNonExistentLibrary() {
+        ParasolShaderMacroTest.macroSetGLSLDirectory('tests/data/');
+        var rv = ParasolShaderMacroTest.macroGetLibraryFunctionText("nonexistentLib.glsl", "noExistentFunc");
+        Assert.equals('glsl library file `nonexistentLib.glsl` not found.', rv);
+    }
 
     /**
      * Given: a file with a main shader function in it
      * When: `ParasolShaderMacro.getShaderText` is called
      * Then: the function text is returned
      */
-
-    /**
-     * Given: a file with no shader function in it
-     * When: `ParasolShaderMacro.getShaderText` is called
-     * Then: an exception is thrown indicating there is no function in the file
-     */
+    function testGetShaderText() {
+        ParasolShaderMacroTest.macroSetGLSLDirectory('tests/data/');
+        var rv = ParasolShaderMacroTest.macroGetShaderText("testShader.fs");
+        Assert.match(~/\s*(\r|\n)*(\r|\n)\/\* Forward decl.*(\r|\n)void main\(void\) \{(\r|\n).*\}/is, rv);
+    }
 
     /**
      * Given: a non-existent file
      * When: `ParasolShaderMacro.getShaderText` for a non-existent file
      * Then: an exception is thrown indicating the file does not exist
      */
+    function testGetShaderTextNonExistentFile() {
+        ParasolShaderMacroTest.macroSetGLSLDirectory('tests/data/');
+        var rv = ParasolShaderMacroTest.macroGetShaderText("noFile.fs");
+        Assert.equals("Shader file `noFile.fs` not found.", rv);
+    }
 }
 
 

@@ -13,10 +13,21 @@ haxelib install libs.hxml
 
 Use VSCode with the vshaxe plugin.
 
-or to build from the command line:
+To build the tests edit the `project.xml` and comment `<!-- <set name="examples"/> -->` and uncomment `<set name="tests"/>`.
+
+or to build from the command line (powershell):
 
 ```
 lime build hl
+```
+
+If you wish to build only selected tests build from the command line and before running the build set 
+`UTEST_PATTERN <pattern to match test names>`. For example to run only the `ParasolShaderMacroTest` tests set
+
+```
+$env:UTEST_PATTERN = 'ParasolShaderMacroTest'
+lime build hl
+lime run hl -D UTEST_PRINT_TESTS
 ```
 
 ## Build the haxelib

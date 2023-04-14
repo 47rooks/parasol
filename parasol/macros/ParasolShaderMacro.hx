@@ -2,7 +2,6 @@ package parasol.macros;
 
 
 #if macro
-
 import haxe.ValueException;
 import haxe.io.Path;
 import haxe.macro.Context;
@@ -25,13 +24,7 @@ using haxe.macro.TypeTools;
  */
 class ParasolShaderMacro
 {
-	// #if 0
-	// private static var __suppressWarning:Array<Class<Dynamic>> = [Expr];
-	// #end
-
-	public function new() {
-
-	}
+	static var GLSL_DIRECTORY = "parasol/shaders/glsl";
 	
 	/**
 	 * Process the @:parasol* macros to load shader and shader library functions
@@ -310,15 +303,6 @@ class ParasolShaderMacro
 	/* ----- Shader library loading and parsing code ----- */
 
 	/**
-	 * Find the `parasol\shaders\glsl` directory.
-	 * 
-	 * @return String the path to the `glsl` directory.
-	 */
-	static function getGLSLDirectory():String {
-		return Context.resolvePath("parasol/shaders/glsl");
-	}
-
-	/**
 	 * Count occurrences of a character in the string `s`.
 	 * @param s 
 	 * @param opening search for opening brace `{`, `}` otherwise. 
@@ -451,10 +435,9 @@ class ParasolShaderMacro
 	 * @return String the function text
 	 */
 	private static function getLibraryFunctionText(libraryFileName:String, functionName:String):String {
-		var directory = getGLSLDirectory();
-        var glslPath:String = Path.join([directory, libraryFileName]);
+        var glslPath:String = Path.join([GLSL_DIRECTORY, libraryFileName]);
 
-        // If file exists then extract the function from it
+		// If file exists then extract the function from it
         if (FileSystem.exists(glslPath)) {
             // get the file content of the template 
             var fileContent:String = File.getContent(glslPath);
@@ -473,9 +456,9 @@ class ParasolShaderMacro
 	 * @return String the shader source text
 	 */
 	private static function getShaderText(glslFileName:String):String {
-        var glslPath:String = glslFileName; //Path.join([directory, glslFileName]);
+        var glslPath:String = glslFileName;
 		if (Path.directory(glslPath) == "") {
-			glslPath = Path.join([getGLSLDirectory(), glslPath]);
+			glslPath = Path.join([GLSL_DIRECTORY, glslPath]);
 		}
 
 		// If the file exists read the shader code and strip the IDE boilerplate
