@@ -19,6 +19,7 @@ class GrayscalePixelationShaderState extends ImagesState {
     override public function create() {
         super.create();
 
+
         // FIXME how to choose between the two shader impls. a state for each - a button ?
         // _shader = new GrayscalePixelationShader(_sprite.width, _sprite.height, 100.0, 100.0);
         _shader = new GrayscaleParasolShader(_sprite.width, _sprite.height, 100.0, 100.0);

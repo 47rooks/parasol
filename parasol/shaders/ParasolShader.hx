@@ -1,13 +1,12 @@
 package parasol.shaders;
 
 
-
 import flixel.system.FlxAssets.FlxShader;
 import openfl.display.ShaderData;
 
 
 #if !macro
-@:autoBuild(new parasol.macros.ParasolShaderMacro().build())
+@:autoBuild(parasol.macros.ParasolShaderMacro.build())
 #end
 class ParasolShader extends FlxShader {
 	/**
