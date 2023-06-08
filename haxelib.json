@@ -4,12 +4,12 @@
     "releasenote": "Ripple shader added.",
     "url": "https://github.com/47rooks/parasol",
     "contributors": ["47rooks"],
-    "version": "0.0.4",
+    "version": "0.0.5",
     "tags": ["flixel","openfl"],
     "description": "A shader and utilities library for HaxeFlixel.",
     "dependencies": {
-        "openfl": "9.1.0",
-        "flixel": "4.11.0",
-        "lime": "7.9.0"
+        "openfl": "",
+        "flixel": "",
+        "lime": ""
     }
 }

@@ -1,5 +1,8 @@
 # Pre-Releases
 
+## 0.0.5 (June 7th 2023)
+   * remove haxelib.json dep lib versions
+
 ## 0.0.4 (March 19th 2023)
    * Ripple shader added
 
