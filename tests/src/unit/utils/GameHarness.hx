@@ -28,8 +28,11 @@ class GameHarness extends FlxGame {
 	 */
 	public function new(gameW:Int = 1920, gameH:Int = 1080)
     {
-        // super(gameW, gameH, null, 1, 60, 60, true); 4.xx with initialZoom=1
+        #if (flixel < "5")
+        super(gameW, gameH, null, 1, 60, 60, true); 4.xx with initialZoom=1
+        #else
         super(gameW, gameH, null, 60, 60, true);
+        #end
 
         // do not run the game loop until instructed
         _runLoop = false;
