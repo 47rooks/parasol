@@ -340,7 +340,6 @@ class ParasolShaderMacroTest extends Test {
     function testGetLibraryFunctionText() {
         ParasolShaderMacroTest.macroSetGLSLDirectory('tests/data/');
         var rv = ParasolShaderMacroTest.macroGetLibraryFunctionText("testShaderLib.glsl", "testFunc");
-        trace('len(rv)=${rv.length}');
         Assert.match(
             ~/void testFunc\(\)(\r|\n)\s+\{(\r|\n)\s+gl_FragColor = vec4\(1.0, 0.0, 0.0, 1.0\);\s*(\r|\n)\}/i, rv
         );

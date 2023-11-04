@@ -17,8 +17,8 @@ using haxe.macro.TypeTools;
 @SuppressWarnings("checkstyle:FieldDocComment")
 /**
  * Derived from OpenFL's ShaderMacro class this class provides support to load fragment
- * shaders from a library file and integrate them with Haxeflixel shader code. Ths objective is
- * to reduce code duplication allowing reuse of individual GLSL functions in multiple shaders.
+ * shaders from a library file and integrate them with Haxeflixel shader code. The objective is
+ * to reduce code duplication by allowing reuse of individual GLSL functions in multiple shaders.
  * 
  * This macro is applied to subclasses of ParasolShader.
  */

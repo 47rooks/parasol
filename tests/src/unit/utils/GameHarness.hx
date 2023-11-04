@@ -1,9 +1,9 @@
 package unit.utils;
 
-import sys.thread.Deque;
-import openfl.events.Event;
 import flixel.FlxG;
 import flixel.FlxGame;
+import openfl.events.Event;
+import sys.thread.Deque;
 
 class GameHarness extends FlxGame {
     /**
@@ -28,7 +28,7 @@ class GameHarness extends FlxGame {
 	 */
 	public function new(gameW:Int = 1920, gameH:Int = 1080)
     {
-        super(gameW, gameH, null, 1, 60, 60, true);
+        super(gameW, gameH, null, 60, 60, true);
 
         // do not run the game loop until instructed
         _runLoop = false;
