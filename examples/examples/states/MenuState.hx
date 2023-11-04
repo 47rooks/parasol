@@ -66,6 +66,27 @@ class MenuState extends FlxState
 			FlxG.switchState(new RippleShaderState());
 		}, "Sinusoidal ripple shader.");
 
+		_row += LINE_Y;
+
+		addMenuItem("Pixelation shader", () ->
+		{
+			FlxG.switchState(new PixelationShaderState());
+		}, "Pixelation shader.");
+
+		_row += LINE_Y;
+
+		addMenuItem("Multi shader filter", () ->
+		{
+			FlxG.switchState(new MultiShaderState());
+		}, "Multi shader example - grayscale and pixelation.");
+
+		_row += LINE_Y;
+
+		addMenuItem("Grayscale pixelation shader", () ->
+		{
+			FlxG.switchState(new GrayscalePixelationShaderState());
+		}, "Grayscale pixelation shader - grayscale.fs loaded from file.");
+
 		// _row += LINE_Y;
 
 		// addMenuItem("Basic shaders", () ->

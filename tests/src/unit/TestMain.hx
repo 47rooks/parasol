@@ -1,12 +1,13 @@
 package unit;
 
-import unit.utils.ImageComparatorTest;
-import openfl.events.Event;
 import openfl.display.Sprite;
-import unit.parasol.math.KernelsTest;
+import openfl.events.Event;
+import unit.parasol.macros.ParasolShaderMacroTest;
 import unit.parasol.math.DistributionsTest;
+import unit.parasol.math.KernelsTest;
 import unit.parasol.shaders.GrayscaleShaderTest;
 import unit.parasol.shaders.LineShaderTest;
+import unit.utils.ImageComparatorTest;
 import utest.Runner;
 import utest.ui.Report;
 
@@ -57,6 +58,7 @@ class TestMain extends Sprite
 		_runner.addCase(new LineShaderTest());
 		_runner.addCase(new GrayscaleShaderTest(stage));
 		_runner.addCase(new ImageComparatorTest());
+		_runner.addCase(new ParasolShaderMacroTest());
 
 		// Remove setup event handler and add one to run the tests
 		// on the game loop.
