@@ -1,5 +1,22 @@
 # Pre-Releases
 
+## 0.0.6 (November 4th 2023)
+   * Shaders
+     * Pixelation
+       * variable pixelation of the image
+     * Sinusoidal ripple
+       * Create ripples with various properties, including as speed and amplitude
+     * Threshold
+       * threshold the image to display only the hotter spots
+     * Grayscale
+       * a Luma grayscale shader
+   * Filters
+     * MultiShaderFilter
+       * allows combining multiple shaders to produce a composite effect
+   * Prototype support for reading shader text from files
+       * support for a library of GLSL routines
+       * enables composing multiple shaders
+
 ## 0.0.5 (June 7th 2023)
    * remove haxelib.json dep lib versions
 

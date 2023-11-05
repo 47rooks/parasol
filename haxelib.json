@@ -1,10 +1,10 @@
 {
     "name": "parasol",
     "license": "MIT",
-    "releasenote": "Update to support flixel 5.",
+    "releasenote": "Pixelation, ripple, grayscale shaders, and a multishader filter.",
     "url": "https://github.com/47rooks/parasol",
     "contributors": ["47rooks"],
-    "version": "0.0.5",
+    "version": "0.0.6",
     "tags": ["flixel","openfl"],
     "description": "A shader and utilities library for HaxeFlixel.",
     "dependencies": {
