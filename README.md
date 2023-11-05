@@ -8,3 +8,6 @@ Currently this is mainly documentation in the doc/HFShaders.md file. I created t
 
 `haxelib install parasol`
 
+## API Documentation
+
+Full class documentation for parasol and its examples is available at (https://47rooks.github.io/parasol/parasol/index.html).
