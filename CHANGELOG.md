@@ -1,5 +1,8 @@
 # Pre-Releases
 
+## x.y.z (in dev)
+   * Shaders
+     * Shake shader - like camera shake, but applicable to any sprite, blur optional
 ## 0.0.6 (November 4th 2023)
    * Shaders
      * Pixelation
