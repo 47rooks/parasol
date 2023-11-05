@@ -40,3 +40,23 @@ release.bat
 ## Updating the CHANGELOG.md
 
 The CHANGELOG.md should only contain updates to the Haxelib package itself. All other updates to the repo are to be excluded.
+
+## Creating documentation
+
+Follow these steps
+   + `git checkout gh-pages`
+   + Create an XML file from the build containing all the type information for the targets of interest
+```
+haxelib run lime build hl -xml
+```
+   + Then run `dox` to generate the HTML files
+```
+haxelib run dox -i .\export\hl\types.xml -o export\docs --title "Parasol" -in "parasol" -in examples -D source-path https://github.com/47rooks/parasol/tree/main
+```
+   + Now commit the changed files and then push the branch to github. This branch does not merge to main.
+```
+git add .
+git commit -m 'updated doc'
+git push origin
+```
+   + Finally, switch to some other branch so you don't accidentally modify this branch further.
