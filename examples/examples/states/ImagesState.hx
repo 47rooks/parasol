@@ -38,6 +38,10 @@ class ImagesState extends DemoState {
         {
             "file": "assets/images/pexels-pixabay-73873.png",
             "name": "Solar flare"
+        },
+        {
+            "file": "assets/images/GameTwo.png",
+            "name": "Breakout"
         }
     ];
 
