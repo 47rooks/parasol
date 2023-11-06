@@ -21,6 +21,7 @@ class ShakeShaderState extends ImagesState {
     var _blur:FlxUICheckBox;
     var _intensity:Float = 0.05;
     var _duration:Float = 0.5;
+    var _blurOffset:Float = 0.0;
 
     override public function new() {
         super();
@@ -40,11 +41,14 @@ class ShakeShaderState extends ImagesState {
         _blur = new FlxUICheckBox(Controls.LINE_X, 100, null, null, "Use blur", 100);
         _blur.getLabel().size = 15;
 
-        var intensitySlider = new FlxSlider(this, "_intensity", Controls.LINE_X, 170.0, 0.0, 1.0, 300, 15, 3, FlxColor.WHITE, FlxColor.WHITE);
+        var intensitySlider = new FlxSlider(this, "_intensity", Controls.LINE_X, 150.0, 0.0, 1.0, 300, 15, 3, FlxColor.WHITE, FlxColor.WHITE);
 		intensitySlider.setTexts("Intensity", true, "0.0", "1.0", 15);
 
-        var durationSlider = new FlxSlider(this, "_duration", Controls.LINE_X, 230.0, 0.0, 5.0, 300, 15, 3, FlxColor.WHITE, FlxColor.WHITE);
+        var durationSlider = new FlxSlider(this, "_duration", Controls.LINE_X, 210.0, 0.0, 5.0, 300, 15, 3, FlxColor.WHITE, FlxColor.WHITE);
 		durationSlider.setTexts("Duration (seconds)", true, "0.0", "5.0", 15);
+
+        var blurOffsetSlider = new FlxSlider(this, "_blurOffset", Controls.LINE_X, 270.0, 0.0, 20.0, 300, 15, 3, FlxColor.WHITE, FlxColor.WHITE);
+		blurOffsetSlider.setTexts("Blur offset (pixels)", true, "0.0", "20.0", 15);
 
         _controls = new Controls(20, 100, 400, 400, [
             // Add button to start shake
@@ -55,28 +59,18 @@ class ShakeShaderState extends ImagesState {
             intensitySlider,
             // Duration of shake in seconds
             durationSlider,
+            // Blur offset
+            blurOffsetSlider,
             // Add a pulldown to choose the image
-            getImageChooser(Controls.LINE_X, 310)
+            getImageChooser(Controls.LINE_X, 330)
         ], _controlsCamera);
 
         add(_controls._controls);
     }
 
-    /**
-     * Toggle the shader on and off, callback for enable checkbox.
-     */
-    //  function toggleShader():Void {
-    //     if (_sprite.shader == null) {
-    //         _sprite.shader = _shader;
-    //         cast(_sprite.shader, ShakeShader).shake(_intensity, _duration, _blur.checked);
-    //     } else {
-    //         _sprite.shader = null;
-    //     }
-    // }
-
     function buttonCbk():Void {
         _sprite.shader = _shader;
-        cast(_sprite.shader, ShakeShader).shake(_intensity, _duration, _blur.checked);
+        cast(_sprite.shader, ShakeShader).shake(_intensity, _duration, _blur.checked, _blurOffset);
     }
 
     override public function update(elapsed:Float):Void {
