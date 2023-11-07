@@ -1,14 +1,14 @@
 package unit.parasol.shaders;
 
 import flixel.FlxG;
-import parasol.shaders.GrayscaleShader;
 import flixel.FlxSprite;
-import unit.utils.ImageComparator;
 import openfl.events.Event;
-import utest.Assert;
+import parasol.shaders.GrayscaleShader;
 import unit.utils.Capture;
 import unit.utils.GameHarness;
+import unit.utils.ImageComparator;
 import unit.utils.StateHarness;
+import utest.Assert;
 import utest.Test;
 
 class GrayscaleShaderTest extends Test {
