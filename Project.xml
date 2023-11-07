@@ -7,8 +7,8 @@
 		 finds all the test artifacts and libs. Otherwise a simple -Dtesting flag added to the build
 		 will build the test application. Removing it will build the game.
 	-->
-	<!-- <set name="tests"/> -->
-	<set name="examples"/>
+	<set name="tests"/>
+	<!-- <set name="examples"/> -->
 	
 	<!-- _________________________ Application Settings _________________________ -->
 
@@ -39,12 +39,12 @@
 	<!-- _____________________________ Path Settings ____________________________ -->
 
 	<set name="BUILD_DIR" value="export" />
-	<source path="parasol" include="parasol" /> // Haxelib source hierarchy
+	<source path="parasol" include="parasol" />                     <!-- Haxelib source hierarchy -->
 	<assets path="assets" />
-	<source path="tests/src" if="tests"/>       // Test code hierarchy
-	<assets path="tests/reference" if="tests"/> // Reference logs
-	<assets path="tests/data" if="tests"/>      // Test data files
-	<source path="examples" if="examples"/>     // Example code
+	<source path="tests/src" include="tests/src/unit" if="tests"/>       <!-- Test code hierarchy -->
+	<assets path="tests/reference" if="tests"/>                               <!-- Reference logs -->
+	<assets path="tests/data" if="tests"/>                                   <!-- Test data files -->
+	<source path="examples" include="examples/examples" if="examples"/>         <!-- Example code -->
 
 	<!-- _______________________________ Libraries ______________________________ -->
 
