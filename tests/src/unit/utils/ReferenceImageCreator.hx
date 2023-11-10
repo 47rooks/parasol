@@ -43,14 +43,28 @@ class ReferenceImageCreator {
         writePNG(bmd, 8, 8, imgDir + "greenSquareWithAlphaPixel.png");
     }
 
-    private function writePNG(bmd: BitmapData, x:Int, y:Int, filePath:String):Void {
+    /**
+     * Write the provided bitmap to a file as a PNG
+     * @param bmd the BitmapData object to write out
+     * @param width the width of the rect to write out
+     * @param height the height of the rect to write out
+     * @param filePath the file to write to
+     */
+    private function writePNG(bmd: BitmapData, width:Int, height:Int, filePath:String):Void {
         var tsba = new ByteArray();
-        bmd.encode(new Rectangle(0,0,x, y), new PNGEncoderOptions(), tsba);
+        bmd.encode(new Rectangle(0, 0, width, height), new PNGEncoderOptions(), tsba);
         var tsb = Bytes.ofData(tsba);
         sys.io.File.saveBytes(filePath, tsb);
     }
 
-    static public function writeCaptureToPNG(rect:Rectangle, filePath:String) {
+    /**
+     * Write the `Capture.image` to a file as a PNG.
+     * Note this presumes that Capture is in use and has an image captured to write out.
+     * 
+     * @param rect the Rectangle portion to write out
+     * @param filePath the file to write to
+     */
+    static public function writeCaptureToPNG(rect:Rectangle, filePath:String):Void {
         // To save a reference file
         // This is the currently functional way to save a bitmap to a png
         var tsba = new ByteArray();
