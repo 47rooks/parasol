@@ -10,7 +10,7 @@ class ReferenceImageCreator {
     // FIXME create reference images based on a run and shader/filter application and collection of the 
     // reference image and dumping it to a file.
 
-    final imgDir =  "\\tests\\data\\";
+    final imgDir =  "tests\\reference\\";
 
     public function new() {}
 
