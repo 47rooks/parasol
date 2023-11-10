@@ -94,7 +94,7 @@ class ImageComparator {
                     return ComparatorResult.IDENTICAL;
                 case -1:   // actual is null
                     return ComparatorResult.ACTUAL_NULL;
-                case -2:   // one of both bitmaps unreadable
+                case -2:   // one or both bitmaps unreadable
                            // This should be impossible to hit because of the check above
                            // and the way the equals API works.
                     return ComparatorResult.UNREADABLE;

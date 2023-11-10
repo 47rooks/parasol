@@ -25,7 +25,8 @@
 	<!-- ____________________________ Window Settings ___________________________ -->
 
 	<!--These window settings apply to all targets-->
-	<window width="1920" height="1280" fps="60" background="#000000" hardware="true" vsync="false" />
+	<window if="examples" width="1920" height="1280" fps="60" background="#000000" hardware="true" vsync="false" />
+	<window if="tests" width="600" height="400" fps="60" background="#000000" hardware="true" vsync="false" />
 
 	<!--HTML5-specific-->
 	<window if="html5" resizable="false" />
