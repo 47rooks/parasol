@@ -2,6 +2,7 @@ package examples.states;
 
 import examples.states.BloomFilterState;
 import examples.states.RippleShaderState;
+import examples.states.SaturationShaderState;
 import examples.states.ShakeShaderState;
 import examples.states.ThresholdShaderState;
 import flixel.FlxG;
@@ -98,6 +99,13 @@ class MenuState extends FlxState
 		{
 			FlxG.switchState(new GrayscalePixelationShaderState());
 		}, "Grayscale pixelation shader - grayscale.fs loaded from file.");
+
+		_column_y_value[0] += LINE_Y;
+
+		addMenuItem(0, "Saturation shader", () ->
+		{
+			FlxG.switchState(new SaturationShaderState());
+		}, "Saturation shader - saturation.fs loaded from file.");
 
 		_column_y_value[0] += LINE_Y;
 

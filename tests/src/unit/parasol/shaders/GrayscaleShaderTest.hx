@@ -2,44 +2,17 @@ package unit.parasol.shaders;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
-import openfl.events.Event;
-import openfl.geom.Rectangle;
 import parasol.shaders.GrayscaleShader;
 import unit.utils.Capture;
 import unit.utils.GameHarness;
 import unit.utils.ImageComparator;
-import unit.utils.ReferenceImageCreator;
 import unit.utils.StateHarness;
 import utest.Assert;
-import utest.Test;
 
-class GrayscaleShaderTest extends Test {
-
-    static final WINDOW_WIDTH = 600;
-    static final WINDOW_HEIGHT = 400;
-    static final REFERENCE_DIR = "tests/reference/";
-
-    var _stage:openfl.display.Stage;
-    var _gameHarness:GameHarness;
-    
+class GrayscaleShaderTest extends ImageCapturingBaseTest {
+ 
     public function new(stage:openfl.display.Stage) {
-        super();
-        _stage = stage;
-    }
-
-    function setup():Void {
-        // Install the GameHarness sized for these tests
-        _gameHarness = new GameHarness(WINDOW_WIDTH, WINDOW_HEIGHT);
-        _stage.addChildAt(_gameHarness, 0);
-        _gameHarness.dispatchEvent(
-            new openfl.events.Event(openfl.events.Event.ADDED_TO_STAGE, false, false));
-    }
-
-    function teardown():Void {
-        // Remove the GameHarness and destroy it
-        _stage.removeChild(_gameHarness);
-        _gameHarness = null;
-        Capture.enabled = false;
+        super(stage);
     }
 
     /**
@@ -67,7 +40,7 @@ class GrayscaleShaderTest extends Test {
         Capture.wait();
 
         // To compare with reference
-        var results = ImageComparator.equals(REFERENCE_DIR + "grayscaleref.png", Capture.image);
+        var results = ImageComparator.equals(ImageCapturingBaseTest.REFERENCE_DIR + "grayscaleref.png", Capture.image);
         Assert.equals(ComparatorResult.IDENTICAL, results);
     }
 }

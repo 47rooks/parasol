@@ -7,6 +7,7 @@ import unit.parasol.math.DistributionsTest;
 import unit.parasol.math.KernelsTest;
 import unit.parasol.shaders.GrayscaleShaderTest;
 import unit.parasol.shaders.LineShaderTest;
+import unit.parasol.shaders.SaturationShaderTest;
 import unit.utils.ImageComparatorTest;
 import utest.Runner;
 import utest.ui.Report;
@@ -57,6 +58,7 @@ class TestMain extends Sprite
 		_runner.addCase(new KernelsTest());
 		_runner.addCase(new LineShaderTest());
 		_runner.addCase(new GrayscaleShaderTest(stage));
+		_runner.addCase(new SaturationShaderTest(stage));
 		_runner.addCase(new ImageComparatorTest());
 		_runner.addCase(new ParasolShaderMacroTest());
 

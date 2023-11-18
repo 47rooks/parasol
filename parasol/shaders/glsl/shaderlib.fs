@@ -55,3 +55,122 @@ vec2 pixelate(vec2 st, vec2 resolution, vec2 pixelSize)
     vec2 pixelatedCoord = pix * floor(st / pix);
     return pixelatedCoord;
 }
+
+/*
+ * rgb_to_hsv returns a vec3 containing HSV values for the provided RGB vec3.
+ *
+ * Parameters
+ *
+ * rgb - the input RGB value as a vec3 with each value between 0.0 - 1.0
+ *
+ * Returns
+ *
+ * vec3 - HSV value corresponding to the input RGB value.
+ *
+ * Credits/References
+ *    https://math.stackexchange.com/questions/556341/rgb-to-hsv-color-conversion-algorithm
+ *    https://www.geeksforgeeks.org/program-change-rgb-color-model-hsv-color-model/
+ */
+vec3 rgb_to_hsv(vec3 rgb)
+{
+    // Compute cmax and cmin and the range or difference
+    float cmax = max(rgb.r, max(rgb.g, rgb.b));
+    float cmin = min(rgb.r, min(rgb.g, rgb.b));
+    float diff = cmax - cmin;
+    float h = -1.0;
+    float s = -1.0;
+
+    // Compute HSV
+    if (cmax == cmin) {
+        h = 0.0;
+    } else {
+        if (cmax == rgb.r) {
+            h = mod(60.0 * (rgb.g - rgb.b) / diff, 360.0);
+        } else if (cmax == rgb.g) {
+            h = mod(60.0 * (rgb.b - rgb.r) / diff + 120.0, 360.0);
+        } else {
+            // max is b
+            h = mod(60.0 * (rgb.r - rgb.g) / diff + 240.0, 360.0);
+        }
+    }
+
+    // Compute s
+    if (cmax == 0.0) {
+        s = 0.0;
+    } else {
+        s = (diff / cmax);
+    }
+    
+    // Compute v
+    float v = cmax;
+    
+    return vec3(h, s, v);
+}
+
+/*
+ * hsv_to_rgb returns a vec3 containing RGB values for the provided HSV vec3.
+ *
+ * Parameters
+ *
+ * hsv - the input HSV value as a vec3
+ *
+ * Returns
+ *
+ * vec3 - RGB value corresponding to the input HSV value.
+ *
+ * Credits/References
+ *    This implementation comes from https://cs.stackexchange.com/questions/64549/convert-hsv-to-rgb-colors
+ *    which has a very clear and detailed explanation of the mathematics involved.
+ */
+vec3 hsv_to_rgb(vec3 hsv)
+{
+    // Note all swizzling of HSV done with xyz to avoid confusion caused by using rgb
+    // in the HSV context.
+
+    float r=0.0, g=0.0, b=0.0;
+    // Process input S and V
+    float cmax = hsv.z;
+    float diff = hsv.y * hsv.z;
+    float cmin = cmax - diff;
+
+    // Compute h-prime to determine which RGB formulae to use
+    float h_prime = 0.0;
+    if (hsv.x >= 300.0) {
+        h_prime = (hsv.x - 360.0) / 60.0;
+    } else {
+        h_prime = hsv.x / 60.0;
+    }
+
+    if (h_prime >= -1.0 && h_prime < 1.0) {
+        if (h_prime < 0.0) {
+            r = cmax;
+            g = cmin;
+            b = g - h_prime * diff;
+        } else {
+            r = cmax;
+            b = cmin;
+            g = b + h_prime * diff;
+        }
+    } else if (h_prime >= 1.0 && h_prime < 3.0) {
+        if (h_prime - 2.0 < 0.0) {
+            g = cmax;
+            b = cmin;
+            r = b - (h_prime - 2.0) * diff;
+        } else {
+            r = cmin;
+            g = cmax;
+            b = r + (h_prime - 2.0) * diff;
+        }
+    } else if (h_prime >= 3.0 && h_prime < 5.0) {
+        if (h_prime - 4.0 < 0.0) {
+            r = cmin;
+            b = cmax;
+            g = r - (h_prime - 4.0) * diff;
+        } else {
+            g = cmin;
+            b = cmax;
+            r = g + (h_prime - 4.0) * diff;
+        }
+    }
+    return vec3(r, g, b);
+}
