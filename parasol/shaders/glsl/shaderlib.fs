@@ -174,3 +174,31 @@ vec3 hsv_to_rgb(vec3 hsv)
     }
     return vec3(r, g, b);
 }
+
+/*
+ * CSS saturation filter based on the CSS filter specification.
+ *
+ * Parameters
+ *
+ * color - the input RGB color value as a vec3
+ * saturation - a float >= 0.0 specifying the saturation to apply.
+ *              1.0 will cause no change.
+ *
+ * Returns
+ *
+ * vec3 - RGB value with applied saturation.
+ *
+ * Credits/References
+ *    https://www.w3.org/TR/filter-effects-1/#elementdef-fecolormatrix
+ *    specifically the section on the type 'saturate'.
+ */
+vec4 css_saturate(vec4 color, float saturation) {
+
+    mat4 sat_mat = mat4(vec4(0.213 + 0.787 * saturation, 0.213 - 0.213 * saturation, 0.213 - 0.213 * saturation, 0.0),
+                        vec4(0.715 - 0.715 * saturation, 0.715 + 0.285 * saturation, 0.715 - 0.715 * saturation, 0.0),
+                        vec4(0.072 - 0.072 * saturation, 0.072 - 0.072 * saturation, 0.072 + 0.928 * saturation, 0.0),
+                      vec4(0.0, 0.0, 0.0, 1.0)
+    );
+
+    return sat_mat * color;
+}

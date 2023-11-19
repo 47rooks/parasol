@@ -2,6 +2,19 @@ package parasol.shaders;
 
 import parasol.shaders.ParasolShader;
 
+enum SaturationAlgorithm {
+    /**
+     * Simple RGB to HSV conversion, modify S value, convert back.
+     */
+    HSV;
+    /**
+     * Implementation of CSS saturate filter algorithm.
+     * Refer https://www.w3.org/TR/filter-effects-1/#elementdef-fecolormatrix
+     * for details.
+     */
+    CSS;
+}
+
 /**
  * Saturate or desaturate a sprite.
  * 
@@ -19,10 +32,17 @@ class SaturationShader extends ParasolShader {
 
     @:parasolLibraryFunction('shaderlib.fs', 'rgb_to_hsv')
     @:parasolLibraryFunction('shaderlib.fs', 'hsv_to_rgb')
+    @:parasolLibraryFunction('shaderlib.fs', 'css_saturate')
     @:parasolFragmentShader('saturation.fs')
-    public function new() {
+    public function new(algorithm:SaturationAlgorithm=CSS) {
         super();
         u_saturation.value = [1.0];
+        switch (algorithm) {
+            case CSS:
+                u_algorithm.value = [true];
+            case HSV:
+                u_algorithm.value = [false];
+        }
     }
 
     function get_saturation():Float {

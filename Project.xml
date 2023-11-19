@@ -7,8 +7,8 @@
 		 finds all the test artifacts and libs. Otherwise a simple -Dtesting flag added to the build
 		 will build the test application. Removing it will build the game.
 	-->
-	<!-- <set name="tests"/> -->
-	<set name="examples"/>
+	<set name="tests"/>
+	<!-- <set name="examples"/> -->
 	
 	<!-- _________________________ Application Settings _________________________ -->
 

@@ -22,7 +22,7 @@ import parasol.shaders.SaturationShader;
     override public function create() {
         super.create();
 
-        _shader = new SaturationShader();
+        _shader = new SaturationShader(CSS);
 
         // Create controls
         var enableC = new FlxUICheckBox(Controls.LINE_X, 50, null, null, "Enable Effect", 100, null, toggleShader);
