@@ -18,8 +18,16 @@ uniform float u_saturation;
  * Modify saturation according to the value of the uniform.
  */
 void main(void) {
-    vec3 hsv = rgb_to_hsv(flixel_texture2D(bitmap, openfl_TextureCoordv).rgb);
-    hsv.z = clamp(hsv.z * u_saturation, 0.0, 1.0);
-    vec3 color = hsv_to_rgb(hsv);
-    gl_FragColor = vec4(color, 1.0);
+
+    mat4 sat_mat = mat4(vec4(0.213+0.787 * u_saturation, 0.213 - 0.213 * u_saturation, 0.213 - 0.213 * u_saturation, 0.0),
+                        vec4(0.715 - 0.715 * u_saturation, 0.715 + 0.285 * u_saturation, 0.715 - 0.715 * u_saturation, 0.0),
+                        vec4(0.072 - 0.072 * u_saturation, 0.072 - 0.072 * u_saturation, 0.072 + 0.928 * u_saturation, 0.0),
+                      vec4(0.0, 0.0, 0.0, 1.0)
+    );
+    // vec3 hsv = rgb_to_hsv(flixel_texture2D(bitmap, openfl_TextureCoordv).rgb);
+    // hsv.z = clamp(hsv.z * u_saturation, 0.0, 1.0);
+    // vec3 color = hsv_to_rgb(hsv);
+    vec4 c = flixel_texture2D(bitmap, openfl_TextureCoordv);
+    gl_FragColor = sat_mat * c;
+    // gl_FragColor = vec4(color, 1.0);
 }
