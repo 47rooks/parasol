@@ -108,14 +108,14 @@ class ShakeShader extends FlxShader {
     }
 
    	/**
-	 * Start shake effect with the specified intensity, duration and optional blur.
+     * Start shake effect with the specified intensity, duration and optional blur.
      * 
-	 * @param intensity maximum proportion (0.0 to 1.0) of screen size to shake in either direction
-	 * @param duration the time in seconds the shake will last
-     * @param blur if true blur while shaking, else do not blur
-     * @param blurOffset distance to sample around the current pixel when blurring in number of pixels.
+     * @param   intensity   maximum proportion (0.0 to 1.0) of screen size to shake in either direction
+     * @param   duration    the time in seconds the shake will last
+     * @param   blur        if true blur while shaking, else do not blur
+     * @param   blurOffset  distance to sample around the current pixel when blurring in number of pixels
 	 */
-	public function shake(intensity:Float = 0.05, duration = 0.5, blur:Bool = false, blurOffset:Float = 1.0):Void
+	public function shake(intensity:Float = 0.05, duration:Float = 0.5, blur:Bool = false, blurOffset:Float = 1.0):Void
     {
         if (intensity > 1.0)
         {

@@ -3,18 +3,18 @@ package parasol.shaders;
 
 import flixel.system.FlxAssets.FlxShader;
 
-#if !macro
-@:autoBuild(parasol.macros.ParasolShaderMacro.build())
-#end
-class ParasolShader extends FlxShader {
-	/**
+    /**
      * This class provides a base class for shaders which are created
      * from GLSL text in a file. See parasol.macros.ParasolShaderMacro.hx
      * for details.
      * 
-	 * Get or set the fragment source used when compiling with GLSL.
-	 * This property is not available on the Flash target.
-	 */
+     * Get or set the fragment source used when compiling with GLSL.
+     * This property is not available on the Flash target.
+     */#if !macro
+@:autoBuild(parasol.macros.ParasolShaderMacro.build())
+#end
+class ParasolShader extends FlxShader {
+
 	public var parasolFragmentSource(get, set):String;
 	public var parasolFunctionsSource(get, set):String;
 	public var parasolFlixelFragmentHeader(get, set):String;

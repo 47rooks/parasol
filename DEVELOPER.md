@@ -70,7 +70,7 @@ haxelib run lime build hl -xml
 ```
    + Then run `dox` to generate the HTML files
 ```
-haxelib run dox -i .\export\hl\types.xml -o export\docs --title "Parasol" -in "parasol" -in examples -D source-path https://github.com/47rooks/parasol/tree/main
+haxelib run dox -i .\export\hl\types.xml -o docs --title "Parasol" -in "parasol" -in examples -D source-path https://github.com/47rooks/parasol/tree/main
 ```
    + Now commit the changed files and then push the branch to github. This branch does not merge to main.
 ```
