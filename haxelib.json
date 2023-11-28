@@ -1,10 +1,10 @@
 {
     "name": "parasol",
     "license": "MIT",
-    "releasenote": "Fix ShakeShader.",
+    "releasenote": "Shake shader with optional blur, Saturation shader with two alorithms.",
     "url": "https://github.com/47rooks/parasol",
     "contributors": ["47rooks"],
-    "version": "0.0.7",
+    "version": "0.0.8",
     "tags": ["flixel","openfl"],
     "description": "A shader and utilities library for HaxeFlixel.",
     "dependencies": {

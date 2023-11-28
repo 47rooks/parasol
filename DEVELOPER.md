@@ -3,8 +3,10 @@
 - [Developer Readme](#developer-readme)
   - [Setting up the development environment](#setting-up-the-development-environment)
   - [Building the tests](#building-the-tests)
-  - [Build the haxelib](#build-the-haxelib)
-  - [Updating the CHANGELOG.md](#updating-the-changelogmd)
+  - [Publishing a new Release](#publishing-a-new-release)
+    - [Updating the CHANGELOG.md](#updating-the-changelogmd)
+    - [Build the haxelib](#build-the-haxelib)
+    - [Publish the release to lib.haxe.org](#publish-the-release-to-libhaxeorg)
   - [Creating documentation](#creating-documentation)
   - [Developing Tests](#developing-tests)
 
@@ -38,16 +40,25 @@ lime build hl
 lime run hl -D UTEST_PRINT_TESTS
 ```
 
-## Build the haxelib
+
+## Publishing a new Release
+
+### Updating the CHANGELOG.md
+
+The CHANGELOG.md should only contain updates to the Haxelib package itself. All other updates to the repo are to be excluded.
+
+### Build the haxelib
 
 Go to a command shell or Powershell
 ```
 release.bat
 ```
 
-## Updating the CHANGELOG.md
+### Publish the release to lib.haxe.org
 
-The CHANGELOG.md should only contain updates to the Haxelib package itself. All other updates to the repo are to be excluded.
+```
+haxelib submit parasol.zip
+```
 
 ## Creating documentation
 

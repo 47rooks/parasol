@@ -1,6 +1,6 @@
 # Pre-Releases
 
-## x.y.z (in dev)
+## 0.0.8 (November 11th 2023)
    * Shaders
      * Shake shader - like camera shake, but applicable to any sprite, blur optional
      * Saturation shader - increase or decrease saturation
